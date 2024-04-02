@@ -27,7 +27,7 @@ func mainContainer() {
 		case "Triangle":
 			triangle()
 		case "Rectangle":
-			notImplemented()
+			rectangle()
 		case "Parallelogram":
 			notImplemented()
 		case "Trapezium":
@@ -56,14 +56,18 @@ func circle() {
 	const PI float64 = 3.14
 	var area float64
 
+	label := widget.NewLabel("Calculate area of a circle")
+
 	radiusInput := widget.NewEntry()
 	radiusInput.SetPlaceHolder("Enter the radius...")
-	radiusText := radiusInput.Text
-	r, err := strconv.ParseFloat(radiusText, 64)
 
 	areaLabel := widget.NewLabel("")
 
 	calculateButton := widget.NewButton("Calculate", func() {
+
+		// radius
+		radiusText := radiusInput.Text
+		r, err := strconv.ParseFloat(radiusText, 64)
 		if err != nil {
 			log.Println("Error converting text to float64 of `radius`: ", err)
 			areaLabel.SetText("Error converting text to float64")
@@ -76,41 +80,45 @@ func circle() {
 		areaLabel.SetText("Area is: " + areaStr)
 	})
 
-	
 	backButton := widget.NewButton("Back", func() {
 		mainContainer()
 	})
 
 	buttonGroup := container.New(layout.NewHBoxLayout(), calculateButton, backButton)
 
-	window.SetContent(container.NewVBox(radiusInput, buttonGroup, areaLabel))
+	window.SetContent(container.NewVBox(label, radiusInput, buttonGroup, areaLabel))
 }
 
 func triangle() {
     var area float64
 
+	label := widget.NewLabel("Calculate area of a triangle")
+
 	perpendicularHeightInput := widget.NewEntry()
 	perpendicularHeightInput.SetPlaceHolder("Enter the perpendicular height...")
-	perpendicularHeightText := perpendicularHeightInput.Text
-	perpendicularHeight, perpendicularHeightErr := strconv.ParseFloat(perpendicularHeightText, 64)
 
 	baseLengthInput := widget.NewEntry()
 	baseLengthInput.SetPlaceHolder("Enter the base length...")
-	baseLengthText := baseLengthInput.Text
-	baseLength, baseLengthErr := strconv.ParseFloat(baseLengthText, 64)
 
 	areaLabel := widget.NewLabel("")
 
 	calculateButton := widget.NewButton("Calculate", func() {
 
+		// perpendicular height
+		perpendicularHeightText := perpendicularHeightInput.Text
+		perpendicularHeight, perpendicularHeightErr := strconv.ParseFloat(perpendicularHeightText, 64)
 		if perpendicularHeightErr != nil {
 			log.Println("Error converting text to float64 of `perpendicular height`: ", perpendicularHeightErr)
 			areaLabel.SetText("Error converting text to float64")
 			return
 		}
 
+
+		// base length
+		baseLengthText := baseLengthInput.Text
+		baseLength, baseLengthErr := strconv.ParseFloat(baseLengthText, 64)
 		if baseLengthErr != nil {
-			log.Println("Error converting text to float64 of `base length.`: ", baseLengthErr)
+			log.Println("Error converting text to float64 of `base length`: ", baseLengthErr)
 			areaLabel.SetText("Error converting text to float64")
 			return
 		}
@@ -120,7 +128,6 @@ func triangle() {
 		areaStr := strconv.FormatFloat(area, 'f', 2, 64)
 		areaLabel.SetText("Area is: " + areaStr)
 	})
-
 	
 	backButton := widget.NewButton("Back", func() {
 		mainContainer()
@@ -128,7 +135,56 @@ func triangle() {
 
 	buttonGroup := container.New(layout.NewHBoxLayout(), calculateButton, backButton)
 
-	window.SetContent(container.NewVBox(perpendicularHeightInput, baseLengthInput, buttonGroup, areaLabel))
+	window.SetContent(container.NewVBox(label, perpendicularHeightInput, baseLengthInput, buttonGroup, areaLabel))
+}
+
+func rectangle(){
+	var area float64
+
+	label := widget.NewLabel("Calculate area of a rectangle")
+
+	lengthInput := widget.NewEntry()
+	lengthInput.SetPlaceHolder("Enter the length...")
+
+	widthInput := widget.NewEntry()
+	widthInput.SetPlaceHolder("Enter the width...")
+
+	areaLabel := widget.NewLabel("")
+
+	calculateButton := widget.NewButton("Calculate", func() {
+
+		// length
+		lengthText := lengthInput.Text
+		length, lengthErr := strconv.ParseFloat(lengthText, 64)
+		if lengthErr != nil {
+			log.Println("Error converting text to float64 of `length`: ", lengthErr)
+			areaLabel.SetText("Error converting text to float64")
+			return
+		}
+
+
+		// width
+		widthText := widthInput.Text
+		width, widthErr := strconv.ParseFloat(widthText, 64)
+		if widthErr != nil {
+			log.Println("Error converting text to float64 of `width`: ", widthErr)
+			areaLabel.SetText("Error converting text to float64")
+			return
+		}
+
+  		area = length * width
+
+		areaStr := strconv.FormatFloat(area, 'f', 2, 64)
+		areaLabel.SetText("Area is: " + areaStr)
+	})
+	
+	backButton := widget.NewButton("Back", func() {
+		mainContainer()
+	})
+
+	buttonGroup := container.New(layout.NewHBoxLayout(), calculateButton, backButton)
+
+	window.SetContent(container.NewVBox(label, lengthInput, widthInput, buttonGroup, areaLabel))
 }
 
 func main() {
