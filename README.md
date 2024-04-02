@@ -4,10 +4,8 @@ This is a simple gui calculator written in Go with fyne. It supports various geo
 
 This is the gui version of [same cli calculator](https://github.com/Kenura-R-Gunarathna/go-calculator.git)
 
-<div style="display:flex;">
-    <img src="./images/screenshot_1.png" height="400px">
-    <img src="./images/screenshot_2.png" height="400px">
-</div>
+<img src="./images/screenshot_1.png" height="400px">
+<img src="./images/screenshot_2.png" height="400px">
 
 ## Features
 
